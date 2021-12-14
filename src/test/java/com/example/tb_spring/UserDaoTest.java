@@ -39,7 +39,7 @@ public class UserDaoTest {
         */
 
         User user = new User();
-        user.setId("E");
+        user.setId("F");
         user.setName("Name");
         user.setPassword("Password");
 

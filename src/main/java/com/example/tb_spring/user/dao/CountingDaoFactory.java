@@ -6,10 +6,20 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CountingDaoFactory {
 
+    // [21.12.14] 수정자 메소드를 이용한 DI 방식을 이용
+    @Bean
+    public UserDao userDao() {
+        UserDao userDao = new UserDao();
+        userDao.setConnectionMaker(connectionMaker());
+        return userDao;
+    }
+
+    /* [21.12.14] 생성자를 이용한 DI 방식을 이용
     @Bean
     public UserDao userDao() {
         return new UserDao(connectionMaker());
     }
+     */
 
     @Bean
     public ConnectionMaker connectionMaker() {

@@ -19,6 +19,19 @@ public class DaoFactory {
 
     @Bean
     public UserDao userDao() {
+        UserDao userDao = new UserDao();
+        userDao.setConnectionMaker(connectionMaker());
+        return userDao;
+    }
+
+    @Bean
+    public ConnectionMaker connectionMaker() {
+        return new MConnectionMaker();
+    }
+
+    /* [21.12.14] 생성자 DI를 사용하는 팩토리 메소드
+    @Bean
+    드ublic UserDao userDao() {
         // 팩토리의 메소드는 userdao 타입의 오브젝트를 어떻게 만들고 어떻게 준비시킬지를 결정한다.
         return new UserDao(connectionMaker());
         // ConnectionMaker connectionmaker 를 분리하여 UserDao userDao()를 간결하게 작성
@@ -28,5 +41,5 @@ public class DaoFactory {
     public ConnectionMaker connectionMaker() {
         return new MConnectionMaker();
     }
-
+    */
 }
