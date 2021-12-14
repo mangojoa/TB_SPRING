@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    스프링은 팩토리 같은 자바 클래스를 이용하는 것 외에도, 다양한 방법을 통해 DI 의존관걔 설정정보를 만들 수 있다.
+
+    이에 대표적인 것이 XML이다. 다루기도 쉬운 단순한 텍스트파일이며 쉽게 이애할 수 있다.
+    컴파일과 같은 별도의 빌드 작업이 없다는 것도 장점이다.
+    환경이 달라져서 오브젝트의 관걔가 바뀌는 경우에도 빠르게 변경사항을 반영할 수 있다.
+    스키마나 DTD를 이용해서 정해진 포맷을 따라 작성됐는지 손쉽게 확인 할 수 있다.
+
+    @Configuration = <beans> / @Bean = <bean> 으로 xml에서는 치환된다.
+
+    빈의 이름 / 클래스 / 의존 오브젝트 등을 정의해야한다.
+    -->
+
+    <!--  connectionMaker() 메소드의 <bean> 태그 전환  -->
+    <bean
+    id="connectionMaker" class="com.example.tb_spring.user.dao.MConnectionMaker">
+    </bean>
+
+    <!--  userDao() 전환  -->
+    <bean id="userDao" class="com.example.tb_spring.user.dao.UserDao"> <!-- 빈의 이름 / 클래스 를 정의한 부분 -->
+        <property name="connectionMaker" ref="connectionMaker"></property> <!-- 빈의 의존 오브젝트 를 정의한 부분 -->
+        <!--
+        xml에서는 <property> 태그를 사용해 의존 오브젝트와 관계를 정의한다.
+        name과 ref라는 두 개의 attribute를 갖는다.
+        name = name of property / 이 프로퍼티 이름으로 수정자 메소드를 알 수 있다.
+        ref = 수정자 메소드를 통해 주입해줄 오브젝트의 빈 이름이다. DI할 오브젝트도 역시 빈이다.
+        -->
+    </bean>
+</beans>
