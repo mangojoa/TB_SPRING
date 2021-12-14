@@ -10,20 +10,8 @@ import java.sql.SQLException;
 @SpringBootApplication
 public class TbSpringApplication {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
-        UserDao dao = new UserDao();
-
-        User user = new User();
-        user.setId("mangojoa05");
-        user.setName("Namae");
-        user.setPassword("nandesuka");
-
-        dao.add(user);
-
-        System.out.println(user.getId() + " Enroll Success");
-
+//    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        SpringApplication.run(TbSpringApplication.class, args);
-    }
+//    }
 
 }

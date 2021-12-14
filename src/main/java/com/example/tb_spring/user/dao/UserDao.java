@@ -1,6 +1,7 @@
 package com.example.tb_spring.user.dao;
 
 import com.example.tb_spring.user.domain.User;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.*;
 
@@ -9,8 +10,8 @@ public class UserDao {
     // interface를 통해 오브젝트에 접근하므로 구체적인 클래스 정보를 알 필요가 없다.
     private ConnectionMaker connectionMaker;
 
-    public UserDao() {
-        connectionMaker = new MConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
