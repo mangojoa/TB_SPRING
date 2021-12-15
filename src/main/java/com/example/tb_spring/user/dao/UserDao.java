@@ -7,24 +7,33 @@ import java.sql.*;
 
 public class UserDao {
 
+    /* [21.12.15]
     // interface를 통해 오브젝트에 접근하므로 구체적인 클래스 정보를 알 필요가 없다.
     private ConnectionMaker connectionMaker;
 
-    // [21.12.14] 수정 메소드를 이용한 DI 방식을 이용
+    [21.12.14] 수정 메소드를 이용한 DI 방식을 이용
     public void setConnectionMaker(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
 
-
-    /* [21.12.14] 생성자를 이용한 DI 방식을 이용 / 아마 CountingDaoFactory 는 수정하지 않아 오류가 날 것이다.
+    [21.12.14] 생성자를 이용한 DI 방식을 이용 / 아마 CountingDaoFactory 는 수정하지 않아 오류가 날 것이다.
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
-     */
-    public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
-        // 인터페이스에 정의된 메소드를 사용하므로 클래스가 바뀐다고 해도 메소드 이름이 변경될 걱정은 없어진다.
+    */
 
+    private DataSource dataSource;
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    public void add(User user) throws SQLException {
+        Connection c = dataSource.getConnection();
+        /*
+        Connection c = connectionMaker.makeConnection(); 은 DataSource를 사용하여
+        Connection c = dataSource.getConnection(); 으로 대체 되었다.
+        */
         PreparedStatement ps = c.prepareStatement(
                 "insert into users(id, name, password) values(?,?,?)");
         ps.setString(1, user.getId());
@@ -37,8 +46,9 @@ public class UserDao {
         c.close();
     }
 
-    public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+    public User get(String id) throws SQLException {
+        Connection c = dataSource.getConnection();
+
         PreparedStatement ps = c.prepareStatement(
                 "select * from users where id = ?");
         ps.setString(1, id);

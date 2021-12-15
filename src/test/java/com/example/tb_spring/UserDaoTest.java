@@ -16,15 +16,13 @@ public class UserDaoTest {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        ConnectionMaker connectionMaker = new MConnectionMaker();
+        /*
+        [21.12.14]
+        이 부분은 DaoFactory를 만들면서 분리된 코드이다.
+        이제는 DaoFactory를 통해 UserDao 오브젝트를 받아다가 자신의 관심사인 테스트를 위해 활용하기만 하면 그만
+        UserDao dao = new UserDao(connectionMaker);
 
-        /* [21.12.14]
-         이 부분은 DaoFactory를 만들면서 분리된 코드이다.
-         이제는 DaoFactory를 통해 UserDao 오브젝트를 받아다가 자신의 관심사인 테스트를 위해 활용하기만 하면 그만
-         UserDao dao = new UserDao(connectionMaker);
-        */
-
-        /* [21.12.14]
+        [21.12.14]
         UserDao dao = new DaoFactory().userDao();
         AnnotationConfigApplicationContext를 사용하게 되면서 이제는 사용하지 않는다.
 
@@ -34,9 +32,8 @@ public class UserDaoTest {
 
         AnnotationConfigApplicationContext를 통해 실행하면 이전 실행과는 다르게 콘솔창에서
         DaoFactory를 통한 오브잭트 생성 로그를 확인할 수 있게 된다.
-        */
 
-        /* [21.12.15] xml파일을 이용한 설정정보를 사용하기에 더이상 사용하지 않는다.
+        [21.12.15] xml파일을 이용한 설정정보를 사용하기에 더이상 사용하지 않는다.
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
         UserDao dao = context.getBean("userDao", UserDao.class);
 
@@ -51,11 +48,13 @@ public class UserDaoTest {
         ClassPathXmlApplicationContext는 XML 파일을 클래스패스에서 가져올 때 사용할 수 있는 편리한 기능이 추가된 것이다.
         => new ClassPathXmlApplicationContext("daoContext.xml", UserDao.class);
         */
-        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+//        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
         UserDao dao = context.getBean("userDao", UserDao.class);
 
         User user = new User();
-        user.setId("A");
+        user.setId("B");
         user.setName("Name");
         user.setPassword("Password");
 

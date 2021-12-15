@@ -22,11 +22,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:2.6.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //implementation 'org.springframework.jdbc:3.0.7'
+    implementation 'mysql:mysql-connector-mxj:5.0.12'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
-    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.25'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
