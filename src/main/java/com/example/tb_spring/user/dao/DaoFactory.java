@@ -18,7 +18,7 @@ DaoFactory를 스프링의 빈 팩토리가 사용할 수 있는 본격적인 �
 @Configuration
 public class DaoFactory {
 
-    /*
+    /* [21.12.15]
     SimpleDriverDataSource는 DB 연결에 필요한 필수 정보를 제공 받을 수 있도록 여러개의 수정자 메소드를 갖고 있다.
     JDBC Driver Class, JDBC URL, ID, PW등
     */

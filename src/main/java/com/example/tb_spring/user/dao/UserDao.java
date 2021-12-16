@@ -29,7 +29,7 @@ public class UserDao {
     }
 
     public void add(User user) throws SQLException {
-        Connection c = dataSource.getConnection();
+        Connection c = this.dataSource.getConnection();
         /*
         Connection c = connectionMaker.makeConnection(); 은 DataSource를 사용하여
         Connection c = dataSource.getConnection(); 으로 대체 되었다.
@@ -47,7 +47,7 @@ public class UserDao {
     }
 
     public User get(String id) throws SQLException {
-        Connection c = dataSource.getConnection();
+        Connection c = this.dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "select * from users where id = ?");
